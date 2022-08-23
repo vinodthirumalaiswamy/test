@@ -1,0 +1,78 @@
+Challenge 3 
+import java.util.*;
+
+// The main method must be in a class named "Main".
+
+class Main {
+
+    private static boolean iskeyExist = false;
+
+    public static void main(String args[]) {
+
+        String searchKey = "x";
+
+        Map<String, Object> lastNode = new HashMap();
+
+        lastNode.put("z","c");
+
+        Map<String, Object> secondNode = new HashMap();
+
+        secondNode.put("y", lastNode);
+
+        Map<String, Object> startNode = new HashMap();
+
+        startNode.put("x", secondNode);
+
+       
+
+        System.out.println("Printing the Input: " + startNode);
+
+       
+
+        // Calling recursive Function
+
+        Main obj = new Main();
+
+        obj.extractResult(startNode, searchKey);
+
+       
+
+        if(!iskeyExist) {
+
+            System.out.println("Search Key Not Found.");
+
+        }
+
+    }
+
+   
+
+    void extractResult(Map<String, Object> input, String searchKey) {
+
+        input.forEach((key, value) -> {
+
+        if(searchKey.equals(key))
+
+            iskeyExist = true;
+
+       
+
+            if(value instanceof Map){
+
+                extractResult((Map<String, Object>)value, searchKey);
+
+            } else if (value instanceof String && iskeyExist) {
+
+                System.out.println("Result: " + value);
+
+            }
+
+        }
+
+        );
+
+    }
+
+}
+
+
